@@ -86,7 +86,7 @@ function Map() {
     });
 
     map.current.loadImage(
-      "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+      "https://img.icons8.com/color/48/000000/car--v2.png",
       (error, image) => {
         if (error) throw error;
         map.current.addImage("custom-marker", image);
@@ -123,24 +123,30 @@ function Map() {
 
   function updateArea(e) {
     const data = draw.getAll();
-    console.log(e.type);
-    const coordinates = data.features[0].geometry.coordinates[0].slice(0, -1);
-    setIsPolygonOn(true);
-    async function fetchPolygonData() {
-      await fetch(
-        `https://vehicles-locator.herokuapp.com/vehicles/api/vehiclesIdsInsidePolygon/`,
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(coordinates),
-        }
-      )
-        .then((res) => res.json())
-        .then((res) => selected(res));
+    console.log(e);
+    if (data.features[0].geometry.coordinates[0] != null) {
+      const coordinates = data.features[0].geometry.coordinates[0].slice(0, -1);
+      setIsPolygonOn(true);
+      async function fetchPolygonData() {
+        await fetch(
+          `https://vehicles-locator.herokuapp.com/vehicles/api/vehiclesIdsInsidePolygon/`,
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(coordinates),
+          }
+        )
+          .then((res) => res.json())
+          // .then((res) => JSON.stringify(res))
+          .then((res) => selected(res));
+      }
+      fetchPolygonData();
+    } else {
+      setIsPolygonOn(false);
+      console.log("nom");
     }
-    fetchPolygonData();
   }
 
   const selected = (vehicles) => {

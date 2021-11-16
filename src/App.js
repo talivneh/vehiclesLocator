@@ -38,8 +38,8 @@ function App() {
   };
 
   return (
-    <div className="flex relative bg-green-500 h-screen">
-      <section className="overflow-scroll">
+    <div className="flex relative bg-red-400 h-screen">
+      <section className="overflow-scroll w-52">
         <h1 className="text-lg font-bold text-white text-center py-2">
           {isPolygonOn
             ? `List Of Vehacles In Selected Area:`
@@ -49,18 +49,18 @@ function App() {
           {selectedVehicle.map((result) => (
             <li
               key={result.id}
-              className="flex py-2 px-2 cursor-pointer hover:opacity-80
-              hover:shadow-lg transition duration-200 ease-out first:border-t bg-gray-200 my-1 mx-1 rounded-md "
+              className="flex py-2 px-2 cursor-default hover:bg-gray-400
+              shadow-md transition duration-200 ease-out first:border-t bg-gray-200 my-1 mx-1 rounded-md "
             >
-              <p>
-                <span className="font-bold">Vehacle ID: </span>
+              <p className=" truncate" tooltip={result.id}>
+                <span className="font-bold ">ID: </span>
                 {result.id}
               </p>
             </li>
           ))}
         </ul>
       </section>
-      <section className="flex-grow relative h-screen">
+      <section className="flex-grow relative h-screen  min-w-[700px]">
         <Map />
       </section>
     </div>
