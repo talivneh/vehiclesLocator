@@ -11,16 +11,17 @@ function App() {
   const isPolygonOn = useRecoilValue(isPolygon);
 
   useEffect(() => {
-    async function fetchAllVehiclesData() {
-      await fetch(
-        "https://vehicles-locator.herokuapp.com/vehicles/api/locations"
-      )
-        .then((res) => res.json())
-        // .then((res) => JSON.stringify(res))
-        .then((res) => allVehicles(res));
+    if (!isPolygonOn) {
+      async function fetchAllVehiclesData() {
+        await fetch(
+          "https://vehicles-locator.herokuapp.com/vehicles/api/locations"
+        )
+          .then((res) => res.json())
+          .then((res) => allVehicles(res));
+      }
+      fetchAllVehiclesData();
     }
-    fetchAllVehiclesData();
-  });
+  }, [isPolygonOn]);
 
   const allVehicles = (vehicles) => {
     let allVehiclesList = [];
