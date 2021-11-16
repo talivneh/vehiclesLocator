@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Map from "./components/Map";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { selectedVehicleList, isPolygon } from "./atoms/modalAtom";
@@ -20,7 +20,7 @@ function App() {
         .then((res) => allVehicles(res));
     }
     fetchAllVehiclesData();
-  }, []);
+  });
 
   const allVehicles = (vehicles) => {
     let allVehiclesList = [];
@@ -30,7 +30,7 @@ function App() {
         lat: vehicle.lat,
         lng: vehicle.lng,
       };
-      allVehiclesList.push(newVehicleObj);
+      return allVehiclesList.push(newVehicleObj);
     });
 
     setSelectedVehicle(allVehiclesList);

@@ -110,7 +110,7 @@ function Map() {
         lat: vehicle.lat,
         lng: vehicle.lng,
       };
-      polygonVehiclesList.push(newVehicleObj);
+      return polygonVehiclesList.push(newVehicleObj);
     });
 
     setSelectedVehicle(polygonVehiclesList);
