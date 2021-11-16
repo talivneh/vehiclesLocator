@@ -12,7 +12,9 @@ function App() {
 
   useEffect(() => {
     async function fetchAllVehiclesData() {
-      await fetch("http://localhost:9000/vehicles/api/locations")
+      await fetch(
+        "https://vehicles-locator.herokuapp.com/vehicles/api/locations"
+      )
         .then((res) => res.json())
         // .then((res) => JSON.stringify(res))
         .then((res) => allVehicles(res));

@@ -83,7 +83,7 @@ function Map() {
       setIsPolygonOn(true);
       async function fetchPolygonData() {
         await fetch(
-          `http://localhost:9000/vehicles/api/vehiclesIdsInsidePolygon/`,
+          `https://vehicles-locator.herokuapp.com/vehicles/api/vehiclesIdsInsidePolygon/`,
           {
             headers: {
               "Content-type": "application/json",
