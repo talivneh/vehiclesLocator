@@ -69,8 +69,8 @@ function Map() {
       container: mapContainer.current,
       style: "mapbox://styles/talivneh/ckvt4juxx0ckc14nmkfihh37h?optimize=true",
       center: [
-        center.longitude,
-        center.latitude,
+        center.longitude || -0.0493916683,
+        center.latitude || 51.4694976807,
       ],
       zoom: 9,
     });
