@@ -2,11 +2,9 @@ import { selectedVehicleList, isPolygon } from "../atoms/modalAtom";
 import { useRef, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import "mapbox-gl/dist/mapbox-gl.css";
-
 import mapboxgl from "!mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import getCenter from "geolib/es/getCenter";
-
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 
 mapboxgl.accessToken =
@@ -71,8 +69,8 @@ function Map() {
       container: mapContainer.current,
       style: "mapbox://styles/talivneh/ckvt4juxx0ckc14nmkfihh37h?optimize=true",
       center: [
-        center.longitude || -0.0493916683,
-        center.latitude || 51.4694976807,
+        center.longitude,
+        center.latitude,
       ],
       zoom: 9,
     });
@@ -96,16 +94,6 @@ function Map() {
             type: "FeatureCollection",
             features: [
               ...pointList[0],
-              {
-                type: "Feature",
-                geometry: {
-                  type: "Point",
-                  coordinates: [-0.0493916683, 51.4694976807],
-                },
-                properties: {
-                  title: "Mapbox DC",
-                },
-              },
             ],
           },
         });
@@ -123,7 +111,6 @@ function Map() {
 
   function updateArea(e) {
     const data = draw.getAll();
-    console.log(e);
     if (data.features[0].geometry.coordinates[0] != null) {
       const coordinates = data.features[0].geometry.coordinates[0].slice(0, -1);
       setIsPolygonOn(true);
@@ -139,13 +126,11 @@ function Map() {
           }
         )
           .then((res) => res.json())
-          // .then((res) => JSON.stringify(res))
           .then((res) => selected(res));
       }
       fetchPolygonData();
     } else {
       setIsPolygonOn(false);
-      console.log("nom");
     }
   }
 
